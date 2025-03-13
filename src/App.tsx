@@ -1,23 +1,19 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
+import ProductsPage from "./pages/Products/Product";
+import Layout from "./components/common/Layout/Layout";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {/* Parent route wrapping all pages with Layout */}
+        <Route element={<Layout />}>
+          <Route path="/" element={<ProductsPage />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
