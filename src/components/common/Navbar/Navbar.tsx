@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState, useCallback } from "react";
-import Logo from "./Logo.webp";
+import Logo from "../../../Images/Logo.webp";
 
 import { getUser } from "../../../api";
 
