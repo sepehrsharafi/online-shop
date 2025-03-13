@@ -64,7 +64,7 @@ function ProductsPage() {
   );
 
   return (
-    <div className="mx-[11%]">
+    <div className="mx-[11%] mb-10">
       <section className="mx-4  my-11 text-lg  flex flex-col md:flex-row gap-4 md:gap-8">
         <input
           className="p-2 px-5 w-full lg:w-3/12 border-[1.7px] rounded-full"
