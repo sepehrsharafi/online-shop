@@ -1,19 +1,22 @@
+// App.tsx (CORRECTED - No Router here)
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom"; // No BrowserRouter import
 import "./App.css";
 import ProductsPage from "./pages/Products/Product";
+
+import CartPage from "./pages/Cart/Cart";
 import Layout from "./components/common/Layout/Layout";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Parent route wrapping all pages with Layout */}
-        <Route element={<Layout />}>
-          <Route path="/" element={<ProductsPage />} />
-        </Route>
-      </Routes>
-    </Router>
+    // No Router wrapper here!
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<ProductsPage />} />
+        <Route path="/cart" element={<CartPage />} />
+      </Route>
+    </Routes>
+    // No Router wrapper here!
   );
 }
 
