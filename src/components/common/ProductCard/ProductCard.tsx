@@ -7,7 +7,7 @@ export default function ProductCard({ props }: any) {
         alt=""
       />
       <section className="flex flex-col mx-6 my-4 gap-3">
-        <h1 className="line-clamp-1 text-lg font-[500]">{props.title}</h1>
+        <h1 className="line-clamp-2 text-lg font-[500]">{props.title}</h1>
         <p className="line-clamp-3 min-h-[72px]">{props.description}</p>
         <div className="flex flex-row justify-between items-center">
           <span className="text-xl font-[600]">
