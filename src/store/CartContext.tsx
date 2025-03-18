@@ -13,6 +13,9 @@ export type CartItemType = {
 type CartContextType = {
   cartItems: CartItemType[];
   addToCart: (item: CartItemType) => void;
+  increaseQuantity: (id: number) => void;
+  decreaseQuantity: (id: number) => void;
+  removeFromCart: (id: number) => void;
   getTotalPrice: () => number;
 };
 
@@ -47,6 +50,30 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     });
   };
 
+  const increaseQuantity = (id: number) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+
+  const decreaseQuantity = (id: number) => {
+    setCartItems((prevItems) => {
+      return prevItems.map((item) => {
+        if (item.id === id) {
+          // Only decrease the quantity, don't filter out when quantity becomes 1
+          return { ...item, quantity: Math.max(1, item.quantity - 1) };
+        }
+        return item;
+      });
+    });
+  };
+
+  const removeFromCart = (id: number) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
   const getTotalPrice = () => {
     return cartItems.reduce(
       (total, item) => total + item.price * item.quantity,
@@ -55,7 +82,16 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, getTotalPrice }}>
+    <CartContext.Provider
+      value={{
+        cartItems,
+        addToCart,
+        increaseQuantity,
+        decreaseQuantity,
+        removeFromCart,
+        getTotalPrice,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
