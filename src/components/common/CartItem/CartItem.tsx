@@ -1,4 +1,8 @@
+import { useCart } from "../../../store/CartContext";
+
 export default function CartItem(props: any) {
+  const { increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
+
   return (
     <tr className="border border-gray-300 h-16">
       <td className="text-center">{props.id}</td>
@@ -6,7 +10,10 @@ export default function CartItem(props: any) {
       <td className="text-center line-clamp-4">{props.description}</td>
       <td className="text-center">
         <div className="flex flex-row justify-center items-center gap-2 h-full">
-          <button className="bg-red-600 text-white p-[6px] rounded-full shadow-md hover:shadow-lg transition-shadow">
+          <button
+            className="bg-red-600 text-white p-[6px] rounded-full shadow-md hover:shadow-lg transition-shadow"
+            onClick={() => decreaseQuantity(props.id)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4"
@@ -23,7 +30,10 @@ export default function CartItem(props: any) {
             </svg>
           </button>
           <span>{props.quantity}</span>
-          <button className="bg-blue-600 text-white p-[6px] rounded-full">
+          <button
+            className="bg-blue-600 text-white p-[6px] rounded-full shadow-md hover:shadow-lg transition-shadow"
+            onClick={() => increaseQuantity(props.id)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4"
@@ -41,10 +51,13 @@ export default function CartItem(props: any) {
           </button>
         </div>
       </td>
-      <td className="text-center">${props.price}</td>
-      <td className="text-center">${props.totalPrice}</td>
+      <td className="text-center">${props.price.toFixed(2)}</td>
+      <td className="text-center">${props.totalPrice.toFixed(2)}</td>
       <td className="text-center">
-        <button className="bg-red-600 text-white p-[6px] rounded-full shadow-md hover:shadow-lg transition-shadow">
+        <button
+          className="bg-red-600 text-white p-[6px] rounded-full shadow-md hover:shadow-lg transition-shadow"
+          onClick={() => removeFromCart(props.id)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
