@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { getProducts } from "../../api";
 import ProductCard from "../../components/common/ProductCard/ProductCard";
 
@@ -14,53 +14,73 @@ type ProductType = {
 function ProductsPage() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Fetch products only once and memoize them
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const fetchedProducts = await getProducts();
-        setProducts(fetchedProducts);
-        console.log(fetchedProducts);
+        setIsLoading(true);
+        // Check if we have the products in localStorage
+        const cachedProducts = localStorage.getItem("products");
+
+        if (cachedProducts) {
+          setProducts(JSON.parse(cachedProducts));
+        } else {
+          const fetchedProducts = await getProducts();
+          setProducts(fetchedProducts);
+          // Cache products in localStorage
+          localStorage.setItem("products", JSON.stringify(fetchedProducts));
+        }
       } catch (error) {
         console.error("Error fetching products:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    const filtered = products.filter((product) =>
-      product.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredProducts(filtered);
-  }, [products, searchTerm]);
+  // Memoize the unique categories
+  const uniqueCategories = useMemo(() => {
+    return Array.from(new Set(products.map((product) => product.category)));
+  }, [products]);
 
-  useEffect(() => {
-    if (selectedCategory === null) {
-      setFilteredProducts(products);
-    } else {
-      const filtered = products.filter(
+  // Memoize the filtered products
+  const filteredProducts = useMemo(() => {
+    // Filter by search term
+    let filtered = products;
+
+    if (searchTerm) {
+      filtered = filtered.filter((product) =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Filter by category
+    if (selectedCategory) {
+      filtered = filtered.filter(
         (product) => product.category === selectedCategory
       );
-      setFilteredProducts(filtered);
     }
-  }, [selectedCategory, products]);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    return filtered;
+  }, [products, searchTerm, selectedCategory]);
+
+  // Memoize the handler functions
+  const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
-  };
+  }, []);
 
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCategory(
-      e.target.value === "no-category" ? null : e.target.value
-    );
-  };
-
-  const uniqueCategories = Array.from(
-    new Set(products.map((product) => product.category))
+  const handleCategoryChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setSelectedCategory(
+        e.target.value === "no-category" ? null : e.target.value
+      );
+    },
+    []
   );
 
   return (
@@ -69,16 +89,16 @@ function ProductsPage() {
         <input
           className="hover:shadow-lg transition-shadow duration-300 p-2 px-5 w-full lg:w-3/12 border-[1.7px] rounded-full"
           type="text"
-          name=""
-          id=""
+          name="search"
+          id="search"
           placeholder="Search for a product..."
           value={searchTerm}
           onChange={handleSearch}
         />
         <select
           className="p-1 w-full lg:w-3/12 border-b-2"
-          name=""
-          id=""
+          name="category"
+          id="category"
           value={selectedCategory === null ? "no-category" : selectedCategory}
           onChange={handleCategoryChange}
         >
@@ -90,11 +110,18 @@ function ProductsPage() {
           ))}
         </select>
       </section>
-      <div className="flex flex-wrap justify-center gap-7">
-        {filteredProducts.map((product: ProductType) => (
-          <ProductCard key={product.id} props={product} />
-        ))}
-      </div>
+
+      {isLoading ? (
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+        </div>
+      ) : (
+        <div className="flex flex-wrap justify-center gap-7">
+          {filteredProducts.map((product: ProductType) => (
+            <ProductCard key={product.id} props={product} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
