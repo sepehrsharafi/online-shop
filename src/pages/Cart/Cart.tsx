@@ -1,3 +1,4 @@
+import React from "react";
 import CartItem from "../../components/common/CartItem/CartItem";
 import { useCart } from "../../store/CartContext";
 
@@ -19,7 +20,7 @@ function CartPage() {
           </tr>
         </thead>
         <tbody>
-          {cartItems.map((item, index) => (
+          {cartItems.map((item) => (
             <CartItem
               key={item.id}
               id={item.id}

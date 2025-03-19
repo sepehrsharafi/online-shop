@@ -1,6 +1,15 @@
+import React from "react";
 import { useCart } from "../../../store/CartContext";
 
-export default function ProductCard({ props }: any) {
+interface ProductCardProps {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  image: string;
+}
+
+export default function ProductCard(props: ProductCardProps) {
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {

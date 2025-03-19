@@ -1,6 +1,16 @@
+import React from "react";
 import { useCart } from "../../../store/CartContext";
 
-export default function CartItem(props: any) {
+interface CartItemProps {
+  id: number;
+  title: string;
+  description: string;
+  quantity: number;
+  price: number;
+  totalPrice: number;
+}
+
+export default function CartItem(props: CartItemProps) {
   const { increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
 
   return (

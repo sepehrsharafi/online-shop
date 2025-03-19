@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 import UserModal from "../UserModal/UserModal";
 
 // Create a separate component for user information to prevent re-renders
-const UserInfo = React.memo(() => {
+const UserInfo = React.memo(function UserInfo() {
   const { user, loading, error, openModal } = useUser();
 
   if (loading) return <span>Loading...</span>;
   if (error) return <div className="text-red-500">{error}</div>;
-  if (user)
+  if (user) {
     return (
       <div
         className="flex items-center gap-2 cursor-pointer"
@@ -38,6 +38,7 @@ const UserInfo = React.memo(() => {
         </span>
       </div>
     );
+  }
   return null;
 });
 

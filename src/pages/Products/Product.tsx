@@ -118,7 +118,7 @@ function ProductsPage() {
       ) : (
         <div className="flex flex-wrap justify-center gap-7">
           {filteredProducts.map((product: ProductType) => (
-            <ProductCard key={product.id} props={product} />
+            <ProductCard key={product.id} {...product} />
           ))}
         </div>
       )}
