@@ -15,7 +15,7 @@ export default function ProductCard({ props }: any) {
 
   return (
     <article className="flex flex-col shadow-md hover:shadow-xl transition-shadow duration-150 rounded-xl w-96">
-      <div className="min-h-96">
+      <div className="h-96">
         <img
           className="w-full h-full py-10 px-10 object-contain"
           src={props.image}
