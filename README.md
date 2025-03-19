@@ -1,6 +1,56 @@
-# Getting Started with Create React App
+# E-commerce React Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An online shop application built with React, TypeScript, and Tailwind CSS. This project focuses on performance, design quality, and responsiveness.
+
+## Features
+
+- User details display
+- Product listing with search and filter functionality
+- Add to cart feature
+- Shopping cart page
+- Increase/decrease and remove products from cart
+
+## Tech Stack
+
+- React (Create React App)
+- TypeScript
+- Tailwind CSS
+- Fake Store API
+
+## Performance Optimization
+
+This project implements several performance optimizations including:
+
+- Minimized component re-renders using React's memoization techniques (useMemo, useCallback, memo)
+- Efficient state management with Context API
+- Optimized build configuration
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+   ```
+   git clone https://github.com/sepehrSharafi/e-commerce-app.git
+   cd e-commerce-app
+   ```
+
+2. Install dependencies:
+
+   ```
+   npm install
+   ```
+
+3. Start the development server:
+   ```
+   npm start
+   ```
 
 ## Available Scripts
 
@@ -8,39 +58,112 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in development mode with Tailwind in watch mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `npm run lint`
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Checks for ESLint errors throughout the project.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `build` folder, including Tailwind CSS optimization.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## API Reference
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This project uses the [Fake Store API](https://fakestoreapi.com/docs) for product and user data.
 
-### `npm run eject`
+Primary endpoints:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- `GET /products` - Fetch all products
+- `GET /users/1` - Fetch user details
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Note: You may need a VPN to access the API.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Project Structure
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+.
+├── .eslintrc.js
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── README.md
+├── tailwind.config.js
+├── tsconfig.json
+├── public/
+│   ├── favicon.png
+│   ├── index.html
+│   └── manifest.json
+└── src/
+    ├── App.css
+    ├── App.tsx
+    ├── index.css
+    ├── index.tsx
+    ├── output.css
+    ├── react-app-env.d.ts
+    ├── api/
+    │   └── index.ts
+    ├── components/
+    │   └── common/
+    │       ├── CartItem/
+    │       │   └── CartItem.tsx
+    │       ├── Layout/
+    │       │   └── Layout.tsx
+    │       ├── Navbar/
+    │       │   └── Navbar.tsx
+    │       ├── ProductCard/
+    │       │   └── ProductCard.tsx
+    │       ├── UserModal/
+    │       │   └── UserModal.tsx
+    ├── Images/
+    │   └── Logo.webp
+    ├── pages/
+    │   ├── Cart/
+    │   │   └── Cart.tsx
+    │   └── Products/
+    │       └── Product.tsx
+    └── store/
+        ├── CartContext.tsx
+        └── UserContext.tsx
+```
 
-## Learn More
+## Architecture
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The application follows a clean architecture approach:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **API**: Handles all external API calls to the Fake Store API
+- **Components**: Contains reusable UI components
+  - **Common**: Shared components used across multiple pages
+    - **CartItem**: Individual cart item component
+    - **Layout**: Main application layout
+    - **Navbar**: Top navigation bar
+    - **ProductCard**: Individual product display card
+    - **UserModal**: User details modal
+- **Pages**: Contains the main page components
+  - **Cart**: Shopping cart page
+  - **Products**: Product listing page
+- **Store**: Manages application state using React Context API
+  - **CartContext**: Manages cart state and operations
+  - **UserContext**: Manages user state and authentication
+
+## Development Workflow
+
+This project follows a structured Git workflow:
+
+1. Create feature branches with descriptive names
+2. Make commits with proper messages
+3. Create pull requests with detailed comments
+4. Merge pull requests to the main branch
+
+## Responsive Design
+
+The application is fully responsive and optimized for all device sizes using Tailwind CSS.
+
+## Author
+
+Sepehr Sharafi
+
+## License
+
+This project is licensed under the MIT License.
