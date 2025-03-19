@@ -15,11 +15,13 @@ export default function ProductCard({ props }: any) {
 
   return (
     <article className="flex flex-col shadow-md hover:shadow-xl transition-shadow duration-150 rounded-xl w-96">
-      <img
-        className="w-full h-96 py-10 px-10 object-contain"
-        src={props.image}
-        alt=""
-      />
+      <div className="min-h-96">
+        <img
+          className="w-full h-full py-10 px-10 object-contain"
+          src={props.image}
+          alt="product-image"
+        />
+      </div>
       <section className="flex flex-col justify-between h-full mx-6 my-4 gap-3">
         <div>
           <h1 className="line-clamp-1 text-lg font-[500]">{props.title}</h1>
@@ -27,7 +29,7 @@ export default function ProductCard({ props }: any) {
         </div>
         <div className="flex flex-row justify-between items-center">
           <span className="text-xl font-[600]">
-            <span className="font-[600] text-lg">$</span>
+            <span>$</span>
             {props.price}
           </span>
           <button
