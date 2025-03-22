@@ -6,7 +6,7 @@ function CartPage() {
   const { cartItems, getTotalPrice } = useCart();
 
   return (
-    <div className="overflow-auto w-full">
+    <section className="overflow-auto w-full">
       <table className="w-full border border-gray-300 min-w-[550px] max-w-7xl mx-3 lg:mx-auto mt-12 lg:text-lg">
         <thead className="border border-gray-300">
           <tr className="h-16 bg-slate-100">
@@ -41,7 +41,7 @@ function CartPage() {
           </tr>
         </tfoot>
       </table>
-    </div>
+    </section>
   );
 }
 

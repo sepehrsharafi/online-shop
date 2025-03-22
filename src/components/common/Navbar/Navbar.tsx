@@ -55,38 +55,40 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex flex-row justify-between items-center p-4 bg-gray-50 shadow-lg">
-        <section className="flex flex-row items-center gap-2 lg:h-14">
-          <UserInfo />
-        </section>
-        <section>
-          <Link to="/">
-            <img className="h-12 lg:h-16" src={Logo} alt="Logo" />
-          </Link>
-        </section>
-        <section className="flex flex-row items-center gap-2">
-          <Link to="/cart" className="flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 hidden lg:block"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-              />
-            </svg>
-            <span className="text-lg">Cart</span>
-            <span className="bg-green-600 text-white px-[10px] py-[3px] lg:py-[2px] lg:text-lg rounded-full">
-              {cartItemCount}
-            </span>
-          </Link>
-        </section>
-      </nav>
+      <header>
+        <nav className="flex flex-row justify-between items-center p-4 bg-gray-50 shadow-lg">
+          <section className="flex flex-row items-center gap-2 lg:h-14">
+            <UserInfo />
+          </section>
+          <section>
+            <Link to="/">
+              <img className="h-12 lg:h-16" src={Logo} alt="Logo" />
+            </Link>
+          </section>
+          <section className="flex flex-row items-center gap-2">
+            <Link to="/cart" className="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 hidden lg:block"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                />
+              </svg>
+              <span className="text-lg">Cart</span>
+              <span className="bg-green-600 text-white px-[10px] py-[3px] lg:py-[2px] lg:text-lg rounded-full">
+                {cartItemCount}
+              </span>
+            </Link>
+          </section>
+        </nav>
+      </header>
 
       {/* User Modal */}
       <UserModal isOpen={isModalOpen} onClose={closeModal} />

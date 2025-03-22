@@ -84,8 +84,8 @@ function ProductsPage() {
   );
 
   return (
-    <div className="mx-[7%] mb-10">
-      <section className="mx-4 my-11 text-lg flex flex-col md:flex-row gap-4 md:gap-8">
+    <section className="mx-[7%] mb-10">
+      <div className="mx-4 my-11 text-lg flex flex-col md:flex-row gap-4 md:gap-8">
         <input
           className="hover:shadow-lg transition-shadow duration-300 p-2 px-5 w-full lg:w-3/12 border-[1.7px] rounded-full"
           type="text"
@@ -109,7 +109,7 @@ function ProductsPage() {
             </option>
           ))}
         </select>
-      </section>
+      </div>
 
       {isLoading ? (
         <div className="flex justify-center items-center h-64">
@@ -122,7 +122,7 @@ function ProductsPage() {
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 }
 
