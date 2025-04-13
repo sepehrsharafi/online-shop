@@ -60,13 +60,17 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
 
   const decreaseQuantity = (id: number) => {
     setCartItems((prevItems) => {
-      return prevItems.map((item) => {
-        if (item.id === id) {
-          // Only decrease the quantity, don't filter out when quantity becomes 1
-          return { ...item, quantity: Math.max(1, item.quantity - 1) };
-        }
-        return item;
-      });
+      const itemToDecrease = prevItems.find((item) => item.id === id);
+
+      if (itemToDecrease && itemToDecrease.quantity === 1) {
+        // If quantity is 1, remove the item
+        return prevItems.filter((item) => item.id !== id);
+      } else {
+        // Otherwise, decrease the quantity
+        return prevItems.map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+        );
+      }
     });
   };
 

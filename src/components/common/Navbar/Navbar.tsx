@@ -55,7 +55,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header>
+      <header className="fixed top-0 left-0 right-0 z-50">
         <nav className="flex flex-row justify-between items-center p-4 bg-gray-50 shadow-lg">
           <section className="flex flex-row items-center gap-2 lg:h-14">
             <UserInfo />
